@@ -97,7 +97,7 @@ class DatasetProcessor:
             return []
 
     
-    def chunk_data(self, data, chunk_size=5):
+    def chunk_data(self, data, chunk_size=CHUNK_SIZE):
         try:
             return [data[i:i + chunk_size] for i in range(0, len(data), chunk_size)]
         except Exception as e:
@@ -241,6 +241,7 @@ class DatasetProcessor:
 
             cleaned_data = []
             for entry in data:
+                entry["rowId"] = int(entry["rowId"])
                 cleaned_entry = {key: clean_text(value) if isinstance(value, str) else value for key, value in entry.items()}
                 cleaned_data.append(cleaned_entry)
 
@@ -312,7 +313,7 @@ class DatasetProcessor:
             print(e)
             return None
         
-    def update_preprocess_status(self,dg_id, cookie, processed_data_available, raw_data_available, preprocess_data_location, raw_data_location, enable_allowed, num_samples, num_pages):
+    def update_preprocess_status(self,dg_id, cookie, processed_data_available, raw_data_available, preprocess_data_location, raw_data_location, enable_allowed, num_samples, num_pages, validationStatus):
         url = STATUS_UPDATE_URL
         
         print(url)
@@ -328,7 +329,8 @@ class DatasetProcessor:
             "rawDataLocation": raw_data_location,
             "enableAllowed": enable_allowed,
             "numSamples": num_samples,
-            "numPages": num_pages
+            "numPages": num_pages,
+            "validationStatus": validationStatus
         }
 
         try:
@@ -436,7 +438,7 @@ class DatasetProcessor:
         if not aggregated_dataset_operation:
             return self.generate_response(False, MSG_FAIL)
         
-        return_data = self.update_preprocess_status(newDgId, cookie, True, False, f"/dataset/{newDgId}/chunks/", "", True, len(cleaned_data), len(chunked_data))
+        return_data = self.update_preprocess_status(newDgId, cookie, True, False, f"/dataset/{newDgId}/chunks/", "", True, len(cleaned_data), len(chunked_data), "success")
         return self.generate_response(True, MSG_PROCESS_COMPLETE)
 
     def handle_minor_append_update(self, dgId, newDgId, cookie, savedFilePath, session_id):
@@ -496,7 +498,7 @@ class DatasetProcessor:
         if not aggregated_dataset_operation:
             return self.generate_response(False, MSG_FAIL)
         
-        return_data = self.update_preprocess_status(newDgId, cookie, True, False, f"/dataset/{newDgId}/chunks/", "", True, len(aggregated_dataset), (len(chunked_data) + page_count))
+        return_data = self.update_preprocess_status(newDgId, cookie, True, False, f"/dataset/{newDgId}/chunks/", "", True, len(aggregated_dataset), (len(chunked_data) + page_count), "success")
         return self.generate_response(True, MSG_PROCESS_COMPLETE)
 
     def handle_patch_update(self, dgId, cookie, patchPayload, session_id):
@@ -559,7 +561,12 @@ class DatasetProcessor:
             if aggregated_dataset is None:
                 return self.generate_response(False, MSG_FAIL)
             
+            initial_chunk_count = (len(aggregated_dataset) + CHUNK_SIZE - 1) // CHUNK_SIZE
+            
             updated_dataset = [row for row in aggregated_dataset if row.get('rowId') not in deleted_rows]
+
+            updated_chunk_count = (len(updated_dataset) + CHUNK_SIZE - 1) // CHUNK_SIZE
+
             updated_dataset = self.reindex_dataset(updated_dataset)
             if updated_dataset is None:
                 return self.generate_response(False, MSG_FAIL)
@@ -567,7 +574,12 @@ class DatasetProcessor:
             chunked_data = self.chunk_data(updated_dataset)
             if chunked_data is None:
                 return self.generate_response(False, MSG_FAIL)
-            
+
+            if initial_chunk_count > updated_chunk_count:
+                empty_chunk_count = initial_chunk_count - updated_chunk_count
+                for _ in range(empty_chunk_count):
+                    chunked_data.append([])
+
             operation_result = self.save_chunked_data(chunked_data, cookie, dgId, 0)
             if not operation_result:
                 return self.generate_response(False, MSG_FAIL)
@@ -575,7 +587,7 @@ class DatasetProcessor:
             save_result_delete = self.save_aggregrated_data(dgId, cookie, updated_dataset)
             if not save_result_delete:
                 return self.generate_response(False, MSG_FAIL)
-        
+        return_data = self.update_preprocess_status(dgId, cookie, True, False, f"/dataset/{dgId}/chunks/", "", True, len(updated_dataset), updated_chunk_count, "success")
         update_dataset_model_response = self.update_dataset_model_status(dgId, cookie)
         return self.generate_response(True, MSG_PROCESS_COMPLETE)
 

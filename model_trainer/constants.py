@@ -39,6 +39,8 @@ MODEL_TRAINING_IN_PROGRESS = "training in-progress"
 
 MODEL_TRAINING_SUCCESSFUL  = "trained"
 
+MODEL_TRAINING_FAILED = "not trained"
+
 
 # MODEL TRAINING PROGRESS SESSION CONSTANTS
 
@@ -58,6 +60,8 @@ TRAINING_IN_PROGRESS_PROGRESS_MESSAGE = "The dataset is being trained on all sel
 DEPLOYING_MODEL_PROGRESS_MESSAGE = "Model training complete. The trained model is now being deployed"
 
 MODEL_TRAINED_AND_DEPLOYED_PROGRESS_MESSAGE = "The model was trained and deployed successfully to the environment"
+
+MODEL_TRAINING_FAILED_ERROR = "Training Failed"
 
 
 INITIATING_TRAINING_PROGRESS_PERCENTAGE=30

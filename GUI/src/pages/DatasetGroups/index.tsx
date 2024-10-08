@@ -28,7 +28,7 @@ const DatasetGroups: FC = () => {
     datasetGroupName: 'all',
     version: 'x.x.x',
     validationStatus: 'all',
-    sort: 'created_timestamp desc',
+    sort: 'last_updated_timestamp desc',
   });
 
   useEffect(() => {
@@ -92,97 +92,118 @@ const DatasetGroups: FC = () => {
           </div>
           <div>
             <div className="search-panel">
-              <FormSelect
-                label=""
-                name="datasetGroupName"
-                placeholder={t('datasetGroups.table.group') ?? ''}
-                options={formattedArray(filterData?.response?.dgNames) ?? []}
-                onSelectionChange={(selection) =>
-                  handleFilterChange(
-                    'datasetGroupName',
-                    (selection?.value as string) ?? ''
-                  )
-                }
-                defaultValue={filters.datasetGroupName}
-              />
-              <FormSelect
-                label=""
-                name="version"
-                placeholder={t('datasetGroups.table.version') ?? ''}
-                options={formattedArray(filterData?.response?.dgVersions) ?? []}
-                onSelectionChange={(selection) =>
-                  handleFilterChange(
-                    'version',
-                    (selection?.value as string) ?? ''
-                  )
-                }
-                defaultValue={filters.version}
-              />
-              <FormSelect
-                label=""
-                name="validationStatus"
-                placeholder={t('datasetGroups.table.validationStatus') ?? ''}
-                options={
-                  formattedArray(filterData?.response?.dgValidationStatuses) ??
-                  []
-                }
-                onSelectionChange={(selection) =>
-                  handleFilterChange(
-                    'validationStatus',
-                    (selection?.value as string) ?? ''
-                  )
-                }
-                defaultValue={filters.validationStatus}
-              />
-              <FormSelect
-                label=""
-                name="sort"
-                placeholder={t('datasetGroups.table.sortBy') ?? ''}
-                options={[
-                  {
-                    label: t('datasetGroups.sortOptions.datasetAsc'),
-                    value: 'name asc',
-                  },
-                  {
-                    label: t('datasetGroups.sortOptions.datasetDesc'),
-                    value: 'name desc',
-                  },
-                  {
-                    label: t('datasetGroups.sortOptions.createdDateDesc'),
-                    value: 'created_timestamp desc',
-                  },
-                  {
-                    label: t('datasetGroups.sortOptions.createdDateAsc'),
-                    value: 'created_timestamp asc',
-                  },
-                ]}
-                onSelectionChange={(selection) =>
-                  handleFilterChange('sort', (selection?.value as string) ?? '')
-                }
-                defaultValue={filters.sort}
-              />
-              <Button onClick={() => setEnableFetch(true)}>
-                {t('global.search')}
-              </Button>
-              <Button
-                onClick={() => {
-                  setFilters({
-                    datasetGroupName: 'all',
-                    version: 'x.x.x',
-                    validationStatus: 'all',
-                    sort: 'created_timestamp desc',
-                  });
-                }}
-              >
-                {t('global.reset')}
-              </Button>
+              <div>
+                <FormSelect
+                  label=""
+                  name="datasetGroupName"
+                  placeholder={t('datasetGroups.table.group') ?? ''}
+                  options={formattedArray(filterData?.response?.dgNames) ?? []}
+                  onSelectionChange={(selection) =>
+                    handleFilterChange(
+                      'datasetGroupName',
+                      (selection?.value as string) ?? ''
+                    )
+                  }
+                  defaultValue={filters.datasetGroupName}
+                />
+              </div>
+              <div>
+                <FormSelect
+                  label=""
+                  name="version"
+                  placeholder={t('datasetGroups.table.version') ?? ''}
+                  options={
+                    formattedArray(filterData?.response?.dgVersions) ?? []
+                  }
+                  onSelectionChange={(selection) =>
+                    handleFilterChange(
+                      'version',
+                      (selection?.value as string) ?? ''
+                    )
+                  }
+                  defaultValue={filters.version}
+                />
+              </div>
+              <div>
+                <FormSelect
+                  label=""
+                  name="validationStatus"
+                  placeholder={t('datasetGroups.table.validationStatus') ?? ''}
+                  options={
+                    formattedArray(
+                      filterData?.response?.dgValidationStatuses
+                    ) ?? []
+                  }
+                  onSelectionChange={(selection) =>
+                    handleFilterChange(
+                      'validationStatus',
+                      (selection?.value as string) ?? ''
+                    )
+                  }
+                  defaultValue={filters.validationStatus}
+                />
+              </div>
+              <div>
+                <FormSelect
+                  label=""
+                  name="sort"
+                  placeholder={t('datasetGroups.table.sortBy') ?? ''}
+                  options={[
+                    {
+                      label: t('datasetGroups.sortOptions.datasetAsc'),
+                      value: 'name asc',
+                    },
+                    {
+                      label: t('datasetGroups.sortOptions.datasetDesc'),
+                      value: 'name desc',
+                    },
+                    {
+                      label: t('datasetGroups.sortOptions.createdDateDesc'),
+                      value: 'created_timestamp desc',
+                    },
+                    {
+                      label: t('datasetGroups.sortOptions.createdDateAsc'),
+                      value: 'created_timestamp asc',
+                    },
+                  ]}
+                  onSelectionChange={(selection) =>
+                    handleFilterChange(
+                      'sort',
+                      (selection?.value as string) ?? ''
+                    )
+                  }
+                  defaultValue={filters.sort}
+                />
+              </div>
+              <div style={{
+                display: "flex",
+                flexDirection: "row",
+                gap: 5
+              }}>
+                <Button onClick={() => setEnableFetch(true)}>
+                  {t('global.search')}
+                </Button>
+                <Button
+                  onClick={() => {
+                    setFilters({
+                      datasetGroupName: 'all',
+                      version: 'x.x.x',
+                      validationStatus: 'all',
+                      sort: 'last_updated_timestamp desc',
+                    });
+                  }}
+                >
+                  {t('global.reset')}
+                </Button>
+              </div>
             </div>
+
             {isLoading && (
               <div className="skeleton-container">
                 <CircularSpinner />
               </div>
             )}
-            {datasetGroupsData?.response?.data?.length > 0 ? (
+            {datasetGroupsData?.response?.data?.length > 0 && (
               <div className="grid-container m-30-0">
                 {datasetGroupsData?.response?.data?.map(
                   (dataset: SingleDatasetType, index: number) => {
@@ -205,7 +226,9 @@ const DatasetGroups: FC = () => {
                   }
                 )}
               </div>
-            ) : (
+            ) }
+
+              {!isLoading && datasetGroupsData?.response?.data?.length===0 && (
               <NoDataView text={t('datasetGroups.noDatasets') ?? ''} />
             )}
 

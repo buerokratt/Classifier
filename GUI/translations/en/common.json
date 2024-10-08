@@ -49,7 +49,8 @@
     "sessionTimeOutTitle": "You session has been ended!",
     "sessionTimeOutDesc": "Extend your session or sign out from application in {{seconds}}",
     "close":"Close",
-    "proceed":"Proceed"
+    "proceed":"Proceed",
+    "maxFileSize":"File size should not exceed 20 MB."
   },
   "menu": {
     "userManagement": "User Management",
@@ -62,7 +63,7 @@
     "trainingSessions": "Training Sessions",
     "testModel": "Test Model",
     "stopWords": "Stop Words",
-    "correctedTexts": "Corrected texts"
+    "correctedTexts": "Corrected Texts"
   },
   "userManagement": {
     "title": "User Management",
@@ -281,7 +282,7 @@
         "delete": {
           "title": "Are you sure?",
           "description": "Once you delete the dataset all models connected to this model will become untrainable. Are you sure you want to proceed?",
-          "error":"Dataset Group Deletion Unsuccessful",
+          "error":"Dataset Group Deletion  Unsuccessful",
           "errorDesc": "There was an issue deleting the dataset group. Please try again. If the problem persists, contact support for assistance."
         },
         "edit": {
@@ -300,7 +301,8 @@
           "confirmationTitle": "Are you sure?",
           "confirmationDesc": "Confirm that you are wish to delete the following dataset",
           "successTitle": "Success: Dataset Deleted",
-          "successDesc": "You have successfully deleted the dataset. The dataset is no longer available and all related data has been removed."
+          "successDesc": "You have successfully deleted the dataset. The dataset is no longer available and all related data has been removed.",
+          "proceedToDashboard": "Proceed to dataset groups"
         }
       }
     }
@@ -329,7 +331,9 @@
   "validationSessions": {
     "title": "Validation Sessions",
     "inprogress": "Validation in-Progress",
-    "fail": "Validation failed because {{class}} class found in the {{column}} column does not exist in hierarchy"
+    "fail": "Validation failed because {{class}} class found in the {{column}} column does not exist in hierarchy",
+    "noSessions":"No ongoing validation sessions available"
+
   },
 
   "correctedTexts": {
@@ -443,7 +447,9 @@
   "trainingSessions": {
     "title": "Training Sessions",
     "inprogress": "Validation in-Progress",
-    "fail": "Validation failed because {{class}} class found in the {{column}} column does not exist in hierarchy"
+    "fail": "Validation failed because {{class}} class found in the {{column}} column does not exist in hierarchy",
+    "noSessions":"No Active Training Sessions",
+    "noSessionsDesc":"There are currently no active training sessions. Once you start a training session, it will appear here. In the meantime, you can initiate a new training session to begin improving your models."
   },
   "testModels": {
     "title": "Test Model",

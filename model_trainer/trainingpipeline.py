@@ -113,6 +113,7 @@ class TrainingPipeline:
 
         logger.info(f"INITIATING TRAINING FOR {self.model_name} MODEL")
         for i in range(len(self.dfs)):
+            logger.info(f"TRAINING FOR DATAFRAME {i+1} of {len(self.dfs)}")
             current_df = self.dfs[i]
             if len(current_df) < 10:
                 current_df = self.replicate_data(current_df, 50).reset_index(drop=True)
@@ -170,7 +171,7 @@ class TrainingPipeline:
                                  
             training_args = TrainingArguments(
                 output_dir= 'tmp',
-                num_train_epochs=1,
+                num_train_epochs=4,
                 per_device_train_batch_size=16,
                 per_device_eval_batch_size=16,
                 logging_dir='./logs',

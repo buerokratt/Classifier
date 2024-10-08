@@ -13,7 +13,7 @@ from constants import   OUTLOOK_DEPLOYMENT_ENDPOINT, JIRA_DEPLOYMENT_ENDPOINT, T
                         INITIATING_TRAINING_PROGRESS_STATUS, TRAINING_IN_PROGRESS_PROGRESS_STATUS, DEPLOYING_MODEL_PROGRESS_STATUS, MODEL_TRAINED_AND_DEPLOYED_PROGRESS_STATUS,  \
                         INITIATING_TRAINING_PROGRESS_MESSAGE, TRAINING_IN_PROGRESS_PROGRESS_MESSAGE, DEPLOYING_MODEL_PROGRESS_MESSAGE, MODEL_TRAINED_AND_DEPLOYED_PROGRESS_MESSAGE, \
                         INITIATING_TRAINING_PROGRESS_PERCENTAGE, TRAINING_IN_PROGRESS_PROGRESS_PERCENTAGE, DEPLOYING_MODEL_PROGRESS_PERCENTAGE, MODEL_TRAINED_AND_DEPLOYED_PROGRESS_PERCENTAGE, \
-                        OUTLOOK, JIRA, TESTING, UNDEPLOYED
+                        OUTLOOK, JIRA, TESTING, UNDEPLOYED, MODEL_TRAINING_FAILED_ERROR, MODEL_TRAINING_FAILED
 from loguru import logger
 
 logger.add(sink=TRAINING_LOGS_PATH)
@@ -47,8 +47,8 @@ class ModelTrainer:
             self.current_deployment_platform = current_deployment_platform
         
         except Exception as e:
-            logger.info("TEST TEST TESTER")
-            logger.info(e)
+            logger.info(f"EXCEPTION IN MODEL_TRAINER INIT : {e}")
+            self.send_error_progress_session(str(e))
         
     @staticmethod
     def create_training_folders(folder_paths):
@@ -79,6 +79,10 @@ class ModelTrainer:
             training_results_payload["trainingResults"]["classes"] = training_results[0]
             training_results_payload["trainingResults"]["accuracy"] = training_results[1]
             training_results_payload["trainingResults"]["f1_score"] = training_results[2]
+        else:
+            training_results_payload["trainingResults"]["classes"] = ""
+            training_results_payload["trainingResults"]["accuracy"] = "0.0"
+            training_results_payload["trainingResults"]["f1_score"] = "0"
 
         payload = {}
         payload["modelId"] = self.new_model_id
@@ -89,18 +93,34 @@ class ModelTrainer:
         payload["inferenceRoutes"] = {"inference_routes":inference_routes}
 
         logger.info(f"{training_status} UPLOAD PAYLOAD - \n {payload}")
+        print(f"{str(training_status)} UPLOAD PAYLOAD - \n {str(payload)}")
 
         response = requests.post( url=UPDATE_MODEL_TRAINING_STATUS_ENDPOINT,
                         json=payload, cookies=self.cookies_payload)
         
         if response.status_code==200:
             logger.info(f"REQUEST TO UPDATE MODEL TRAINING STATUS TO {training_status} SUCCESSFUL")
+            print(f"REQUEST TO UPDATE MODEL TRAINING STATUS TO {str(training_status)} SUCCESSFUL")
 
         
         else:
             logger.error(f"REQUEST TO UPDATE MODEL TRAINING STATUS TO {training_status} FAILED")
             logger.error(f"ERROR RESPONSE {response.text}")
+            
+            print(f"REQUEST TO UPDATE MODEL TRAINING STATUS TO {str(training_status)} FAILED")
+            print(f"ERROR RESPONSE {str(response.text)}")
+            self.send_error_progress_session(f"Error :{str(response.text)}")
             raise RuntimeError(response.text)
+        
+    def send_error_progress_session(self, error_msg):
+        response = self.update_model_training_progress_session(MODEL_TRAINING_FAILED_ERROR, error_msg, 100, True)
+        current_timestamp = self.get_current_timestamp()
+        self.update_model_db_training_status(training_status=MODEL_TRAINING_FAILED,
+                                                model_s3_location="",
+                                                last_trained_time_stamp=current_timestamp,
+                                                training_results=[], 
+                                                inference_routes=[])
+        return response
 
     def update_model_training_progress_session(self,training_status, 
                                                training_progress_update_message, training_progress_percentage,
@@ -176,6 +196,7 @@ class ModelTrainer:
         else:
             
             logger.info(f"UNRECOGNIZED DEPLOYMENT PLATFORM - {self.current_deployment_platform}")
+            self.send_error_progress_session(f"UNRECOGNIZED DEPLOYMENT PLATFORM - {str(self.current_deployment_platform)}")
             raise RuntimeError(f"RUNTIME ERROR - UNRECOGNIZED DEPLOYMENT PLATFORM - {self.current_deployment_platform}")
         
 
@@ -322,6 +343,27 @@ class ModelTrainer:
             
             response = s3_ferry.transfer_file(s3_save_location, "S3", local_source_location, "FS")
             
+            MODEL_RESULT_FOLDER = f"{MODEL_RESULTS_PATH}/{self.new_model_id}"
+            MODEL_RESULT_ZIP_FILE = f"{MODEL_RESULTS_PATH}/{self.new_model_id}.zip"
+            
+            if os.path.exists(MODEL_RESULT_FOLDER):
+                try:
+                    shutil.rmtree(MODEL_RESULT_FOLDER)
+                    print(f"Folder '{MODEL_RESULT_FOLDER}' deleted successfully.")
+                except Exception as e:
+                    print(f"Folder '{MODEL_RESULT_FOLDER}' not deleted. Reason: {e}")
+            else:
+                print(f"Folder '{MODEL_RESULT_FOLDER}' not found in storage.")
+            
+            if os.path.exists(MODEL_RESULT_ZIP_FILE):
+                try:
+                    os.remove(MODEL_RESULT_ZIP_FILE)
+                    print(f"Zip file '{MODEL_RESULT_ZIP_FILE}' deleted successfully.")
+                except Exception as e:
+                    print(f"Zip file '{MODEL_RESULT_ZIP_FILE}' not deleted. Reason: {e}")
+            else:
+                print(f"Zip file '{MODEL_RESULT_ZIP_FILE}' not found in storage.")
+
             if response.status_code == 201:
                 logger.info(f"MODEL FILE UPLOADED SUCCESSFULLY TO {s3_save_location}")
             
@@ -372,6 +414,6 @@ class ModelTrainer:
                 self.deploy_model(best_model_name=best_model_name, progress_session_id=session_id)
 
         except Exception as e:
-
+            self.send_error_progress_session(f"RUNTIME CRASHED - ERROR - {str(e)}")
             logger.error(f"RUNTIME CRASHED - ERROR - {e}")
 
