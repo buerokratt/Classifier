@@ -13,10 +13,10 @@
     "notificationError": "Viga",
     "active": "Aktiivne",
     "activate": "Aktiveeri",
-    "deactivate": "Desaktiveeri",
-    "disconnect": "Eemalda ühendus",
+    "deactivate": "Deaktiveeri",
+    "disconnect": "Eemalda",
     "connect": "Ühenda",
-    "on": "Käesolev",
+    "on": "Sees",
     "off": "Väljas",
     "back": "Tagasi",
     "from": "Alates",
@@ -71,30 +71,30 @@
     "addUser": {
       "addUserModalTitle": "Lisa uus kasutaja",
       "editUserModalTitle": "Redigeeri kasutajat",
-      "deleteUserModalTitle": "Oled kindel?",
-      "deleteUserModalDesc": "Kinnita, et soovid kustutada järgmise kirje",
+      "deleteUserModalTitle": "Kas oled kindel?",
+      "deleteUserModalDesc": "Kinnita, et soovid kasutaja kustutada",
       "name": "Ees- ja perekonnanimi",
       "namePlaceholder": "Sisesta nimi",
       "role": "Roll",
       "rolePlaceholder": "-Vali-",
-      "personalId": "Isiklik ID",
-      "personalIdPlaceholder": "Sisesta isiklik ID",
+      "personalId": "Isikukood",
+      "personalIdPlaceholder": "Sisesta Isikukood",
       "title": "Ametinimetus",
       "titlePlaceholder": "Sisesta ametinimetus",
       "email": "E-post",
       "emailPlaceholder": "Sisesta e-post",
       "nameRequired": "Nimi on kohustuslik",
       "roleRequired": "Roll on kohustuslik",
-      "idCodeRequired": "ID kood on kohustuslik",
+      "idCodeRequired": "Isikukood on kohustuslik",
       "titleRequired": "Ametinimetus on kohustuslik",
       "emailRequired": "E-post on kohustuslik",
-      "invalidIdCode": "Vigane ID kood",
+      "invalidIdCode": "Vigane isikukood",
       "invalidEmail": "Vigane e-post",
       "userExists": "Kasutaja juba olemas"
     },
     "table": {
       "fullName": "Täisnimi",
-      "personalId": "Isiklik ID",
+      "personalId": "Isikukood",
       "role": "Roll",
       "email": "E-post",
       "actions": "Tegevused",
@@ -111,21 +111,21 @@
     "disconnected": "Ühendus katkestatud",
     "integrationErrorTitle": "Integratsioon ebaõnnestus",
     "integrationErrorDesc": "Ebaõnnestus ühenduse loomine {{channel}}-iga. Palun kontrollige oma seadistusi ja proovige uuesti. Kui probleem püsib, võtke ühendust toe saamiseks.",
-    "integrationSuccessTitle": "Integratsioon edukas",
+    "integrationSuccessTitle": "Integratsioon õnnestus",
     "integrationSuccessDesc": "Olete edukalt ühendatud {{channel}}-iga! Teie integratsioon on nüüd lõppenud ja saate alustada {{channel}}-iga sujuvat töötamist.",
-    "confirmationModalTitle": "Oled kindel?",
-    "disconnectConfirmationModalDesc": "Kas oled kindel, et soovid katkestada {{channel}} integratsiooni? See tegevus on pöördumatu ja võib mõjutada teie töövoogu ja lingitud probleeme.",
+    "confirmationModalTitle": "Kas oled kindel?",
+    "disconnectConfirmationModalDesc": "Kas oled kindel, et soovid lõpetada {{channel}} integratsiooni? See tegevus on pöördumatu ja võib mõjutada teie töövoogu ja lingitud probleeme.",
     "connectConfirmationModalDesc": "Kas oled kindel, et soovid luua ühenduse {{channel}}-iga? See tegevus on pöördumatu ja võib mõjutada teie töövoogu ja lingitud probleeme.",
     "disconnectErrorTitle": "Katkestamine ebaõnnestus",
-    "disconnectErrorDesc": "Ebaõnnestus {{channel}} katkestamine. Palun kontrollige oma seadistusi ja proovige uuesti. Kui probleem püsib, võtke ühendust toe saamiseks.",
+    "disconnectErrorDesc": "Ebaõnnestus {{channel}}-iga katkestamine. Palun kontrollige oma seadistusi ja proovige uuesti. Kui probleem püsib, võtke ühendust toe saamiseks.",
     "addUserButton": " Lisa kasutaja",
     "addUser": {
       "name": "Ees- ja perekonnanimi",
       "namePlaceholder": "Sisesta nimi",
       "role": "Roll",
       "rolePlaceholder": "-Vali-",
-      "personalId": "Isiklik ID",
-      "personalIdPlaceholder": "Sisesta isiklik ID",
+      "personalId": "Isikukood",
+      "personalIdPlaceholder": "Sisesta Isikukood",
       "title": "Ametinimetus",
       "titlePlaceholder": "Sisesta ametinimetus",
       "email": "E-post",
@@ -148,12 +148,12 @@
   "datasetGroups": {
     "title": "Andmestiku Grupid",
     "createDatasetGroupButton": "Loo Andmestiku Grupp",
-    "noDatasets": "Andmestike komplekte ei ole saadaval",
+    "noDatasets": "Andmestike komplekte pole",
     "sortOptions": {
-      "datasetAsc": "Andmestiku Grupi Nimi A-Z",
-      "datasetDesc": "Andmestiku Grupi Nimi Z-A",
-      "createdDateAsc": "Loomise Kuupäev Vanaimene Esiteks",
-      "createdDateDesc": "Loomise Kuupäev Uuemaine Esiteks"
+      "datasetAsc": "Nimi A-Z",
+      "datasetDesc": "Nimi Z-A",
+      "createdDateAsc": "Loomise Kuupäev Kasvavalt",
+      "createdDateDesc": "Loomise Kuupäev Kahanevalt"
     },
     "table": {
       "group": "Andmestiku Grupp",
@@ -169,8 +169,8 @@
       "validationInprogress": "Kontroll On Käimas",
       "notValidated": "Ei Ole Kontrollitud",
       "settings": "Seaded",
-      "lastModelTrained": "Viimane Mudel Treenitud",
-      "lastUsedForTraining": "Viimane Kasutatud Treenimiseks",
+      "lastModelTrained": "Viimane Treenitud Mudel",
+      "lastUsedForTraining": "Viimati Kasutatud Treenimiseks",
       "lastUpdate": "Viimane Uuendus",
       "latest": "Viimased"
     },
@@ -206,7 +206,7 @@
       "classsesInsufficientDescription": "Andmestikus peab olema vähemalt 2 peamist klassi klassi hierarhias",
       "createDatasetSuccessTitle": "Andmestiku Grupp Loodud Edukalt",
       "createDatasetUnsuccessTitle": "Andmestiku Grupi Loomine Ebaõnnestus",
-      "createDatasetSucceessDesc": "Oled edukalt loonud andmestiku grupi. Üksikasjalikus vaates saad nüüd andmestikku vaadata ja vajadusel redigeerida.",
+      "createDatasetSucceessDesc": "Oled edukalt loonud andmestiku grupi. Andmekogude grupidde all saad andmestikku vaadata ja vajadusel redigeerida.",
       "navigateDetailedViewButton": "Mine Üksikasjalikku Vaatesse",
       "enableDatasetTitle": "Andmestiku Grupi Lülitamine Ebaõnnestus",
       "enableDatasetDesc": "Andmestiku gruppi ei saa aktiveerida, kuni andmed on lisatud. Palun lisa andmestikke sellesse gruppi ja proovi uuesti.",
@@ -215,13 +215,13 @@
     },
     "detailedView": {
       "connectedModels": "Ühendatud Mudelid",
-      "noOfItems": "Kaupade Arv",
+      "noOfItems": "Objektide Arv",
       "export": "Eksporti Andmestik",
       "import": "Impordi Andmestik",
       "unsavedChangesWarning": "Oled teinud muudatusi andmestikus, mis ei ole salvestatud. Palun salvesta muudatused, et neid rakendada",
       "insufficientExamplesDesc": "Kuidas näidisandmed puuduvad - andmestiku grupi aktiveerimiseks on vajalik vähemalt 10 näidist",
-      "noData": "Andmeid Ei Ole Saadaval",
-      "noCorrectedTexts": "Parandatud Tekste Ei Ole Saadaval",
+      "noData": "Andmeid Ei Ole",
+      "noCorrectedTexts": "Parandatud Tekste Ei Ole",
       "noDataDesc": "Oled loonud andmestiku grupi, kuid andmeid, mida siin kuvada, pole saadaval. Sa saad üles laadida andmestiku, et vaadata seda siin. Kui andmed on lisatud, saad neid vajadusel redigeerida või kustutada.",
       "importExamples": "Impordi Näidised",
       "importNewData": "Impordi Uued Andmed",
@@ -240,14 +240,14 @@
       "exportDataSuccessDesc": "Sinu andmed on edukalt eksporditud.",
       "exportDataUnsucessTitle": "Andmete Eksportimine Ebaõnnestus",
       "exportDataUnsucessDesc": "Midagi läks valesti. Palun proovi uuesti.",
-      "ImportDataUnsucessTitle": "Andmete Impordi Ebaõnnestus",
+      "ImportDataUnsucessTitle": "Andmete Import Ebaõnnestus",
       "importDataUnsucessDesc": "Midagi läks valesti. Palun proovi uuesti.",
       "validationInitiatedTitle": "Andmestik Laaditi Üles ja Kontroll Alustati",
       "validationInitiatedDesc": "Andmestiku fail laaditi edukalt üles. Kontroll ja eeltöötlus on nüüd alanud",
       "viewValidations": "Vaata Kontrolli Sessioone",
       "fieldName": "Sisesta välja nimi",
       "fieldNameError": "{{name}} ei saa kasutada välja nime",
-      "fieldNameExist": "{{name}} on juba olemas välja nimeena",
+      "fieldNameExist": "{{name}} on juba olemas välja nimena",
       "selectDataType": "Vali andme tüüp",
       "table": {
         "id": "rowId",
@@ -257,7 +257,7 @@
       },
       "validationsTitle": "Andmestiku Grupi Kontrollid",
       "classHierarchy": "Klassi Hierarhiad",
-      "delete": "Kusta Andmestik",
+      "delete": "Kustuta Andmestik",
       "modals": {
         "import": {
           "title": "Impordi uusi andmeid",
@@ -300,7 +300,7 @@
         "datasetDelete": {
           "confirmationTitle": "Oled sa kindel?",
           "confirmationDesc": "Kinnita, et soovid kustutada järgmise andmestiku",
-          "successTitle": "Edu: Andmestik Kustutatud",
+          "successTitle": "Andmestik Kustutatud",
           "successDesc": "Oled edukalt kustutanud andmestiku. Andmestik ei ole enam saadaval ja kõik seotud andmed on eemaldatud.",
           "proceedToDashboard": "Jätkake andmekogumite gruppidega"
         }
@@ -315,7 +315,7 @@
     "importModal": {
       "title": "Impordi lõpetamise sõnu",
       "importButton": "Impordi",
-      "selectionLabel": "Vali järgmine valik",
+      "selectionLabel": "Vali",
       "addOption": "Impordi, et lisada",
       "updateOption": "Impordi, et uuendada",
       "deleteOption": "Impordi, et kustutada",
@@ -331,7 +331,7 @@
   "validationSessions": {
     "title": "Kontrolli Sessioonid",
     "inprogress": "Kontroll Käib",
-    "fail": "Kontroll ebaõnnestus, kuna {{class}} klassi ei leitud {{column}} veerus hierarhias",
+    "fail": "Kontroll ebaõnnestus, kuna {{class}} klassi ei leitud {{column}} veeru hierarhias",
     "noSessions": "Käimasolevaid valideerimissessioone pole saadaval"
   },
   "correctedTexts": {
@@ -363,8 +363,8 @@
     "sortOptions": {
       "dataModelAsc": "Andmemudeli Nimi A-Z",
       "dataModelDesc": "Andmemudeli Nimi Z-A",
-      "createdDateAsc": "Loomise Kuupäev Vanaimene Esiteks",
-      "createdDateDesc": "Loomise Kuupäev Uuemaine Esiteks"
+      "createdDateAsc": "Loomise Kuupäev Kasvav",
+      "createdDateDesc": "Loomise Kuupäev Kahanev"
     },
     "filters": {
       "modelName": "Mudeli Nimi",
@@ -399,7 +399,7 @@
       "classes": "Klassid",
       "accuracy": "Täpsus",
       "f1Score": "F1 Skoor",
-      "noResults": "Koolituse tulemusi pole saadaval",
+      "noResults": "Koolituse tulemused pole saadaval",
       "viewResults": "Vaata Tulemusi"
     },
     "createDataModel": {
