@@ -20,7 +20,7 @@ User and feature guide for the Classifier system. This document mirrors the
 - Enter the Smart ID (Estonian Personal Identification Number) on the login screen.
 - Using only the authorized IDs (ID Card, Mobile ID, Smart ID, EU eID), the users will be able to log into the system.
 
-![System sign in screen](images/01-system-sign-in.png)
+![System sign in screen](../images/01-system-sign-in.png)
 
 ---
 
@@ -41,7 +41,7 @@ For the Admin Users, on the left navigation panel, click on the 'User Management
 - Use the pagination options available below the table view to navigate the full list of users available in the system.
 - Each column has an option that supports the sorting to sort the list alphabetically.
 
-![User management table](images/02-user-management-view-all-users.png)
+![User management table](../images/02-user-management-view-all-users.png)
 
 ### Adding the First User to the System
 
@@ -61,14 +61,14 @@ For the Admin Users, on the left navigation panel, click on the 'User Management
 - From the drop-down list in the 'Role' field users are allowed to select and assign either of the two roles or both for the new user.
 - When the user is successfully added to the system, the success toast will be shown at the bottom right corner of the screen and the added user record can be seen from the 'User Table'.
 
-![Add a new user](images/03-user-management-add-new-user.png)
+![Add a new user](../images/03-user-management-add-new-user.png)
 
 ### Edit User Details
 
 - Select the 'Change' action button of the respective user record which needs to be edited.
 - The 'Edit User' pop-up modal with pre-filled user data will be shown.
 
-![Edit user details](images/04-user-management-edit-user.png)
+![Edit user details](../images/04-user-management-edit-user.png)
 
 ### Delete Users
 
@@ -76,7 +76,7 @@ For the Admin Users, on the left navigation panel, click on the 'User Management
 - The 'Delete Confirmation' pop-up modal will be shown.
 - Upon confirming the deletion, the selected user record will be deleted and thus, the corresponding user will not be able to log into the system again.
 
-![Delete user confirmation](images/05-user-management-delete-user.png)
+![Delete user confirmation](../images/05-user-management-delete-user.png)
 
 ---
 
@@ -98,7 +98,7 @@ The system supports two different types of integrations, namely:
 - If the connection is successful, the 'Integration Successful' pop-up is shown whereas the 'Integration Unsuccessful' pop-up is shown if the connection is not successful.
 - Upon switching off an integration toggle, a confirmation pop-up will be shown to mark the user's consent.
 
-![Integrations page](images/06-integrations.png)
+![Integrations page](../images/06-integrations.png)
 
 ---
 
@@ -131,7 +131,7 @@ A dataset group is a schema outlining the structure and validation rules of the 
   - Version status
   - 'Settings' button
 
-![Dataset groups overview](images/07-dataset-groups-overview.png)
+![Dataset groups overview](../images/07-dataset-groups-overview.png)
 
 #### Dataset Groups: Create a New Dataset Group
 
@@ -159,7 +159,7 @@ A dataset group is a schema outlining the structure and validation rules of the 
 > - There will be inline validation errors if there are any validation issues in validation rules and class hierarchy.
 > - An error will also be shown if the validation criteria requirements are not met (there should be at least 2 rules and at least one data class).
 
-![Create a new dataset group](images/08-dataset-groups-create.png)
+![Create a new dataset group](../images/08-dataset-groups-create.png)
 
 ### Dataset Groups: Detail Page of a Dataset Group
 
@@ -184,7 +184,7 @@ A dataset group is a schema outlining the structure and validation rules of the 
   - By clicking on the respective dataset group's version card from the overview page, the user gets directed to the dataset group detail page from which the imported dataset can be previewed after saving. Here pagination options should be used to see the entire dataset.
   - For each record in the dataset, there should be 'Change' and 'Delete' buttons.
 
-![Dataset group detail page](images/09-dataset-groups-detail.png)
+![Dataset group detail page](../images/09-dataset-groups-detail.png)
 
 ### Dataset Groups: Updates
 
@@ -207,7 +207,7 @@ A dataset group is a schema outlining the structure and validation rules of the 
 - The delete confirmation pop-up will appear.
 - If confirmed, the selected version of the dataset group will get deleted and removed from the info tile grid view on the 'Dataset Group Overview' page.
 
-![Delete dataset group](images/10-dataset-groups-delete.png)
+![Delete dataset group](../images/10-dataset-groups-delete.png)
 
 ### Dataset Groups: Export Dataset Group
 
@@ -309,7 +309,7 @@ This section includes both production data models as well as normal data models.
 - If successfully updated, the 'Changes Saved Successfully' success pop-up modal will be shown.
 - When a production data model is updated, the new version of the data model will either replace any existing model for the same platform, whereas any existing model will be marked as 'Undeployed'.
 
-![Configure a data model](images/16-data-models-configure.png)
+![Configure a data model](../images/16-data-models-configure.png)
 
 ### Data Models: Updates
 
@@ -329,7 +329,7 @@ To test a model deployed to Jira you can create a service desk ticket on the con
 - When confirmed, it will be deleted and removed from the overview page.
 - Here, for production models a warning message will be displayed as an additional step when deleting.
 
-![Delete a data model](images/17-data-models-delete-1.png)
+![Delete a data model](../images/17-data-models-delete-1.png)
 
 ### Data Models: View Training Results
 
